@@ -50,6 +50,6 @@ def main():
     num_hidden = 200
     num_output = 10
 
-    nw = NeuralNetwork()
+    nw = NeuralNetwork(num_input, num_hidden, num_output)
     
-    # nw.Train(num_input, num_hidden, num_output)
+    # nw.Train()

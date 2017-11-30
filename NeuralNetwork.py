@@ -70,6 +70,46 @@ class NeuralNetwork:
 		  
 		return result
 
+	def MeanCrossEntropyError(self, trainData):  # on train or test data matrix
+		sumSquaredError = 0.0
+		x_values = np.zeros(shape=[self.ni], dtype=np.float32)
+		t_values = np.zeros(shape=[self.no], dtype=np.float32)
+
+		for i in range(len(trainData)):  # walk thru each data item
+			for j in range(self.ni):  # peel off input values from curr data row 
+				x_values[j] = trainData[i, j]
+		
+			for j in range(self.no):  # peel off tareget values from curr data row
+				t_values[j] = trainData[i, j+self.ni]
+
+			y_values = self.computeOutputs(x_values)  # computed output values
+		  
+			for j in range(self.no):
+				sumError += log(y_values[j] * t_values[j])
+			
+		return -1.0 * sumError / len(trainData)
+
+	def accuracy(self, tdata):  # train or test data matrix
+	    num_correct = 0; num_wrong = 0
+	    x_values = np.zeros(shape=[self.ni], dtype=np.float32)
+	    t_values = np.zeros(shape=[self.no], dtype=np.float32)
+
+	    for i in range(len(tdata)):  # walk thru each data item
+	      for j in range(self.ni):  # peel off input values from curr data row 
+	        x_values[j] = tdata[i,j]
+	      for j in range(self.no):  # peel off tareget values from curr data row
+	        t_values[j] = tdata[i, j+self.ni]
+
+	      y_values = self.computeOutputs(x_values)  # computed output values)
+	      max_index = np.argmax(y_values)  # index of largest output value 
+
+	      if abs(t_values[max_index] - 1.0) < 1.0e-5:
+	        num_correct += 1
+	      else:
+	        num_wrong += 1
+
+	    return (num_correct * 1.0) / (num_correct + num_wrong)
+
 	@staticmethod
 	def hypertan(x):
 		if x < -20.0:
