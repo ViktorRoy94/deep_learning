@@ -70,38 +70,38 @@ class NeuralNetwork:
 		  
 		return result
 
-	def MeanCrossEntropyError(self, trainData):  # on train or test data matrix
+	def MeanCrossEntropyError(self, trainData):
 		sumSquaredError = 0.0
 		x_values = np.zeros(shape=[self.ni], dtype=np.float32)
 		t_values = np.zeros(shape=[self.no], dtype=np.float32)
 
-		for i in range(len(trainData)):  # walk thru each data item
-			for j in range(self.ni):  # peel off input values from curr data row 
+		for i in range(len(trainData)):
+			for j in range(self.ni):
 				x_values[j] = trainData[i, j]
 		
-			for j in range(self.no):  # peel off tareget values from curr data row
+			for j in range(self.no):
 				t_values[j] = trainData[i, j+self.ni]
 
-			y_values = self.computeOutputs(x_values)  # computed output values
+			y_values = self.computeOutputs(x_values)
 		  
 			for j in range(self.no):
 				sumError += log(y_values[j] * t_values[j])
 			
 		return -1.0 * sumError / len(trainData)
 
-	def accuracy(self, tdata):  # train or test data matrix
+	def accuracy(self, tdata):
 	    num_correct = 0; num_wrong = 0
 	    x_values = np.zeros(shape=[self.ni], dtype=np.float32)
 	    t_values = np.zeros(shape=[self.no], dtype=np.float32)
 
-	    for i in range(len(tdata)):  # walk thru each data item
-	      for j in range(self.ni):  # peel off input values from curr data row 
+	    for i in range(len(tdata)):
+	      for j in range(self.ni):
 	        x_values[j] = tdata[i,j]
-	      for j in range(self.no):  # peel off tareget values from curr data row
+	      for j in range(self.no):
 	        t_values[j] = tdata[i, j+self.ni]
 
-	      y_values = self.computeOutputs(x_values)  # computed output values)
-	      max_index = np.argmax(y_values)  # index of largest output value 
+	      y_values = self.computeOutputs(x_values)
+	      max_index = np.argmax(y_values)
 
 	      if abs(t_values[max_index] - 1.0) < 1.0e-5:
 	        num_correct += 1
