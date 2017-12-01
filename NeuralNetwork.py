@@ -79,7 +79,7 @@ class NeuralNetwork:
 		for k in range(self.no):
 			self.oNodes[k] = softOut[k]
 		return self.oNodes
-		
+
 	def computeGradient(self, t_values, oGrads, hGrads):
 		for i in range(self.no):
 			oGrads[i] = (t_values[i] - self.oNodes[i])
@@ -109,8 +109,7 @@ class NeuralNetwork:
 		for i in range(len(x_values)):
 			y_values = self.computeOutputs(x_values[i])
 			for j in range(self.no):
-				if (y_values[j] * t_values[i][j] != 0):
-					sumError += math.log(y_values[j] * t_values[i][j])
+				sumError += math.log(y_values[j]) * t_values[i][j]
 		return -1.0 * sumError / len(x_values)
 
 	def accuracy(self, x_values, t_values):
