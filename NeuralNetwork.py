@@ -18,12 +18,12 @@ class NeuralNetwork:
 		self.hBiases = np.zeros(shape=[self.nh], dtype=np.float32)
 		self.oBiases = np.zeros(shape=[self.no], dtype=np.float32)
 
-		self.rnd = random.Random(10) # allows multiple instances
+		self.rnd = random.Random(10)
 		self.initializeWeights()
-	
+
 	def initializeWeights(self):
-		lo = -0.05 
-		hi = 0.05
+		lo = 0.001 
+		hi = 0.009
 		for i in range(self.ni):
 		  for j in range(self.nh):
 		    self.ihWeights[i,j] = (hi - lo) * self.rnd.random() + lo
@@ -37,6 +37,23 @@ class NeuralNetwork:
 		  
 		for k in range(self.no):
 		  self.oBiases[k] = (hi - lo) * self.rnd.random() + lo
+
+	def train(self, x_values, t_values, maxEpochs, learnRate, crossError):
+		hGrads = np.zeros(shape=[self.nh], dtype=np.float32)
+		oGrads = np.zeros(shape=[self.no], dtype=np.float32)
+		rand_indicies = np.arange(len(x_values))
+		for epoch in range(maxEpochs):
+			print("Epoch = ", epoch)
+			if (self.crossEntropyError(x_values, t_values) < crossError):
+				return;
+
+			np.random.shuffle(rand_indicies)
+			x_values = x_values[rand_indicies]
+			t_values = t_values[rand_indicies]
+			for i in range(len(x_values)):
+				self.computeOutputs(x_values[i])
+				self.computeGradient(t_values[i], oGrads, hGrads)
+				self.updateWeightsAndBiases(learnRate, hGrads, oGrads)
 
 	def computeOutputs(self, xValues):
 		hSums = np.zeros(shape=[self.nh], dtype=np.float32)
@@ -61,42 +78,8 @@ class NeuralNetwork:
 		softOut = self.softmax(oSums)
 		for k in range(self.no):
 			self.oNodes[k] = softOut[k]
-		  
-		result = np.zeros(shape=self.no, dtype=np.float32)
-		for k in range(self.no):
-			result[k] = self.oNodes[k]
-		  
-		return result
-
-	def accuracy(self, x_values, t_values):
-		num_correct = 0
-		num_wrong = 0
-		for i in range(len(x_values)):
-			y_values = self.computeOutputs(x_values[i])
-			max_index = np.argmax(y_values)
-			if abs(t_values[i][max_index] - 1.0) < 1.0e-5:
-				num_correct += 1
-			else:
-				num_wrong += 1
-
-		return (num_correct * 1.0) / (num_correct + num_wrong)
-
-	def train(self, x_values, t_values, maxEpochs, learnRate, crossError):
-		hGrads = np.zeros(shape=[self.nh], dtype=np.float32)
-		oGrads = np.zeros(shape=[self.no], dtype=np.float32)
-
-		for epoch in range(maxEpochs):
-			print("Epoch = ", epoch)
-			if (self.crossEntropyError(x_values, t_values) < crossError):
-				return;
-
-			np.random.shuffle(x_values)
-			np.random.shuffle(t_values)
-			for i in range(len(x_values)):
-				self.computeOutputs(x_values[i])
-				self.computeGradient(t_values[i], oGrads, hGrads)
-				self.updateWeightsAndBiases(learnRate, hGrads, oGrads)
-
+		return self.oNodes
+		
 	def computeGradient(self, t_values, oGrads, hGrads):
 		for i in range(self.no):
 			oGrads[i] = (t_values[i] - self.oNodes[i])
@@ -107,7 +90,6 @@ class NeuralNetwork:
 			for j in range(self.no):
 				sum_ += oGrads[j] * self.hoWeights[i, j]
 			hGrads[i] = derivative * sum_
-
 
 	def updateWeightsAndBiases(self, learnRate, hGrads, oGrads):
 		for i in range(self.ni):
@@ -123,15 +105,25 @@ class NeuralNetwork:
 			self.oBiases[i] += learnRate * oGrads[i] * 1.0
 
 	def crossEntropyError(self, x_values, t_values):
-		sumSquaredError = 0.0
+		sumError = 0.0
 		for i in range(len(x_values)):
 			y_values = self.computeOutputs(x_values[i])
-			sumError = 0.0
 			for j in range(self.no):
 				if (y_values[j] * t_values[i][j] != 0):
 					sumError += math.log(y_values[j] * t_values[i][j])
-			
 		return -1.0 * sumError / len(x_values)
+
+	def accuracy(self, x_values, t_values):
+		num_correct = 0
+		num_wrong = 0
+		for i in range(len(x_values)):
+			y_values = self.computeOutputs(x_values[i])
+			max_index = np.argmax(y_values)
+			if abs(t_values[i][max_index] - 1.0) < 1.0e-5:
+				num_correct += 1
+			else:
+				num_wrong += 1
+		return (num_correct * 1.0) / (num_correct + num_wrong)
 
 	@staticmethod
 	def hypertan(x):
@@ -152,3 +144,4 @@ class NeuralNetwork:
 		for i,elem in enumerate(oSums):
 			result[i] =  math.exp(elem - max_) / divisor
 		return result
+

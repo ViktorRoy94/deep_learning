@@ -38,12 +38,12 @@ def main():
     X_test = load_mnist_images('t10k-images-idx3-ubyte.gz')
     t_test = load_mnist_labels('t10k-labels-idx1-ubyte.gz')
 
-    num_train_images = 10000
-    num_test_images = 1000
+    num_train_images = 1000
+    num_test_images = 100
     image_size = 28 * 28
 
-    max_epochs = 20
-    learn_rate = 0.008
+    max_epochs = 15
+    learn_rate = 0.005
     cross_error = 0.005
 
     num_input = image_size
