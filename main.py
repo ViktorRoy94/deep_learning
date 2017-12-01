@@ -34,12 +34,12 @@ def load_mnist_labels(filename):
 
 def main():
     X_train = load_mnist_images('train-images-idx3-ubyte.gz')
-    y_train = load_mnist_labels('train-labels-idx1-ubyte.gz')
+    t_train = load_mnist_labels('train-labels-idx1-ubyte.gz')
     X_test = load_mnist_images('t10k-images-idx3-ubyte.gz')
-    y_test = load_mnist_labels('t10k-labels-idx1-ubyte.gz')
+    t_test = load_mnist_labels('t10k-labels-idx1-ubyte.gz')
 
-    num_train_images = 100
-    num_test_images = 10000
+    num_train_images = 10000
+    num_test_images = 1000
     image_size = 28 * 28
 
     max_epochs = 20
@@ -47,27 +47,23 @@ def main():
     cross_error = 0.005
 
     num_input = image_size
-    num_hidden = 200
+    num_hidden = 100
     num_output = 10
 
-    train_Data = np.zeros(shape=[num_train_images,num_input+num_output], dtype=np.float32)
-    test_Data = np.zeros(shape=[num_test_images,num_input+num_output], dtype=np.float32)
+    X_train = X_train[0:num_train_images]
+    t_train = t_train[0:num_train_images]
 
-    for i in range(num_train_images):
-        train_Data[i] = np.append(X_train[i], y_train[i])
+    X_test = X_test[0:num_train_images]
+    t_test = t_test[0:num_train_images]
 
-
-    for i in range(num_test_images):
-        test_Data[i] = np.append(X_test[i], y_test[i])
-
-    print(train_Data.shape)
-    print(test_Data.shape)
+    print(X_train.shape)
+    print(t_train.shape)
 
     nw = nn.NeuralNetwork(num_input, num_hidden, num_output)
     
-    nw.train(train_Data, max_epochs, learn_rate, cross_error)
+    nw.train(X_train, t_train, max_epochs, learn_rate, cross_error)
 
-    print("Train: ", nw.accuracy(train_Data), " Test:", nw.accuracy(test_Data))
+    print("Train: ", nw.accuracy(X_train, t_train), " Test:", nw.accuracy(X_test, t_test))
 
 if __name__ == '__main__':
     main()
