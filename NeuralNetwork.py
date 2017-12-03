@@ -28,15 +28,15 @@ class NeuralNetwork:
 		  for j in range(self.nh):
 		    self.ihWeights[i,j] = (hi - lo) * self.rnd.random() + lo
 		
-		for j in range(self.nh):
-		  for k in range(self.no):
-		    self.hoWeights[j,k] = (hi - lo) * self.rnd.random() + lo
+		for i in range(self.nh):
+		  for j in range(self.no):
+		    self.hoWeights[i,j] = (hi - lo) * self.rnd.random() + lo
 			
-		for j in range(self.nh):
-		  self.hBiases[j] = (hi - lo) * self.rnd.random() + lo
+		for i in range(self.nh):
+		  self.hBiases[i] = (hi - lo) * self.rnd.random() + lo
 		  
-		for k in range(self.no):
-		  self.oBiases[k] = (hi - lo) * self.rnd.random() + lo
+		for i in range(self.no):
+		  self.oBiases[i] = (hi - lo) * self.rnd.random() + lo
 
 	def train(self, x_values, t_values, maxEpochs, learnRate, crossError):
 		hGrads = np.zeros(shape=[self.nh], dtype=np.float32)
@@ -62,22 +62,22 @@ class NeuralNetwork:
 		for i in range(self.ni):
 			self.iNodes[i] = xValues[i]
 
-		for j in range(self.nh):
-			for i in range(self.ni):
-				hSums[j] += self.iNodes[i] * self.ihWeights[i,j]
-			hSums[j] += self.hBiases[j]
+		for i in range(self.nh):
+			for j in range(self.ni):
+				hSums[i] += self.iNodes[j] * self.ihWeights[j,i]
+			hSums[i] += self.hBiases[i]
 		  
-		for j in range(self.nh):
-			self.hNodes[j] = self.hypertan(hSums[j])
+		for i in range(self.nh):
+			self.hNodes[i] = self.hypertan(hSums[i])
 
-		for k in range(self.no):
+		for i in range(self.no):
 			for j in range(self.nh):
-				oSums[k] += self.hNodes[j] * self.hoWeights[j,k]
-			oSums[k] += self.oBiases[k]
+				oSums[i] += self.hNodes[j] * self.hoWeights[j,i]
+			oSums[i] += self.oBiases[i]
 
 		softOut = self.softmax(oSums)
-		for k in range(self.no):
-			self.oNodes[k] = softOut[k]
+		for i in range(self.no):
+			self.oNodes[i] = softOut[i]
 		return self.oNodes
 
 	def computeGradient(self, t_values, oGrads, hGrads):
@@ -122,7 +122,7 @@ class NeuralNetwork:
 				num_correct += 1
 			else:
 				num_wrong += 1
-		return (num_correct * 1.0) / (num_correct + num_wrong)
+		return (num_correct * 1.0) / (num_correct + num_wrong)*100
 
 	@staticmethod
 	def hypertan(x):

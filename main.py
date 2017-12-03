@@ -35,7 +35,6 @@ def load_mnist_labels(filename):
 
 def main():
     args = sys.argv
-    print(args)
     if '-h' in args:
         print(" -h help")
         print(" -n numer train images")
@@ -57,16 +56,16 @@ def main():
 
     if '-n' in args:
         idx = args.index('-n')
-        num_train_images = args[idx+1]
+        num_train_images = int(args[idx+1])
     if '-t' in args:
         idx = args.index('-t')
-        num_test_images = args[idx+1]
+        num_test_images = int(args[idx+1])
     if '-s' in args:
         idx = args.index('-s')
-        num_hidden = args[idx+1]
+        num_hidden = int(args[idx+1])
     if '-l' in args:
         idx = args.index('-l')
-        learn_rate = args[idx+1]
+        learn_rate = float(args[idx+1])
 
     X_train = load_mnist_images('train-images-idx3-ubyte.gz')
     t_train = load_mnist_labels('train-labels-idx1-ubyte.gz')
@@ -83,7 +82,7 @@ def main():
     
     nw.train(X_train, t_train, max_epochs, learn_rate, cross_error)
 
-    print("Train: ", nw.accuracy(X_train, t_train), " Test:", nw.accuracy(X_test, t_test))
+    print("Train: ", nw.accuracy(X_train, t_train), "% Test:", nw.accuracy(X_test, t_test), "%")
 
 if __name__ == '__main__':
     main()
