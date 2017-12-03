@@ -1,5 +1,6 @@
 import os
 import gzip
+import sys
 import numpy as np
 
 from urllib.request import urlretrieve
@@ -33,12 +34,16 @@ def load_mnist_labels(filename):
     return labels
 
 def main():
-    X_train = load_mnist_images('train-images-idx3-ubyte.gz')
-    t_train = load_mnist_labels('train-labels-idx1-ubyte.gz')
-    X_test = load_mnist_images('t10k-images-idx3-ubyte.gz')
-    t_test = load_mnist_labels('t10k-labels-idx1-ubyte.gz')
+    args = sys.argv
+    print(args)
+    if '-h' in args:
+        print(" -h help")
+        print(" -n numer train images")
+        print(" -t numer test images")
+        print(" -s numer hidden layer nodes")
+        print(" -l learn rate ")
 
-    num_train_images = 100
+    num_train_images = 1000
     num_test_images = 100
     image_size = 28 * 28
 
@@ -50,14 +55,29 @@ def main():
     num_hidden = 100
     num_output = 10
 
+    if '-n' in args:
+        idx = args.index('-n')
+        num_train_images = args[idx+1]
+    if '-t' in args:
+        idx = args.index('-t')
+        num_test_images = args[idx+1]
+    if '-s' in args:
+        idx = args.index('-s')
+        num_hidden = args[idx+1]
+    if '-l' in args:
+        idx = args.index('-l')
+        learn_rate = args[idx+1]
+
+    X_train = load_mnist_images('train-images-idx3-ubyte.gz')
+    t_train = load_mnist_labels('train-labels-idx1-ubyte.gz')
+    X_test = load_mnist_images('t10k-images-idx3-ubyte.gz')
+    t_test = load_mnist_labels('t10k-labels-idx1-ubyte.gz')
+
     X_train = X_train[0:num_train_images]
     t_train = t_train[0:num_train_images]
 
-    X_test = X_test[0:num_train_images]
-    t_test = t_test[0:num_train_images]
-
-    print(X_train.shape)
-    print(t_train.shape)
+    X_test = X_test[0:num_test_images]
+    t_test = t_test[0:num_test_images]
 
     nw = nn.NeuralNetwork(num_input, num_hidden, num_output)
     
