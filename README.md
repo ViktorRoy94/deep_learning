@@ -30,7 +30,7 @@
 <p align="center"><img src="https://rawgit.com/ViktorRoy94/deep_learning_lab1/master//tex/f8ce48e4708e476899413ca68cba9971.svg?invert_in_darkmode" align=middle width=126.424485pt height=40.62036pt/></p>
 
 ### Алгоритм
-1. Инициализируем веса <p align="center"><img src="https://rawgit.com/ViktorRoy94/deep_learning_lab1/master//tex/63d8e7089019f25eb69d9fbc9c0aa9e7.svg?invert_in_darkmode" align=middle width=11.6771655pt height=7.614155999999999pt/></p> и <p align="center"><img src="https://rawgit.com/ViktorRoy94/deep_learning_lab1/master//tex/edb5c59b360815398034e1673afb81c9.svg?invert_in_darkmode" align=middle width=13.130799pt height=9.851588999999999pt/></p> значениями из [0,0.5]
+1. Инициализируем веса <p align="center"><img src="https://rawgit.com/ViktorRoy94/deep_learning_lab1/master//tex/2cf68af2a7f22008cd34c07d0a454c09.svg?invert_in_darkmode" align=middle width=23.445674999999998pt height=9.5433525pt/></p> и <p align="center"><img src="https://rawgit.com/ViktorRoy94/deep_learning_lab1/master//tex/2de931a49231aca051b8756cffd491b7.svg?invert_in_darkmode" align=middle width=24.899325pt height=11.780802pt/></p> значениями из [0,0.5]
 2. Пока количество проходов < max_epoch делаем:
 
 	Для всех картинок от 1 до number_train_images
