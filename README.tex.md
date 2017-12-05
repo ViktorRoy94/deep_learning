@@ -33,34 +33,40 @@ $$\phi(y_j)={{e^{2y_j}-1}\over{e^{2y_j}+1}}$$
 $$f(y_j)={{e^{y_j}}\over\sum_{j=1}^{n}e^{y_j}}$$
 
 ### Алгоритм
-1. Инициализируем веса $$\inline{w_i_s}$$ и $$\inline{w_s_j}$$ значениями из [0,0.5]
+1. Инициализируем веса значениями из [0,0.5]
 2. Пока количество проходов < max_epoch делаем:
 
 	Для всех картинок от 1 до number_train_images
-	1. Подаем на вход $$\inline{x_i}$$, суммируем cигналы на скрытом слое $$\inline{z_s}=w_0_s+\sum_{i}^{N_i}{w_i_s}x_i$$, применяем функцию активации $$\inline{v_s}=f(z_s)$$
-    2. Для каждого выходного нейрона суммируем взвешенные входящие сигналы  $$\inline{y_j}=w_0_j+\sum_{s}^{N_s}{w_s_j}f({z_s})$$ и применяем функцию активации $$\inline{u_j}=f(y_j)$$
-	3. Считаем градиенты функции ошибки:
+	+ Подаем на вход x, суммируем cигналы на скрытом слое $$\inline{z_s}=w_0_s+\sum_{i}^{N_i}{w_i_s}x_i$$, применяем функцию активации $$\inline{v_s}=f(z_s)$$
+    + Для каждого выходного нейрона суммируем взвешенные входящие сигналы $$\inline{y_j}=w_0_j+\sum_{s}^{N_s}{w_s_j}f({z_s})$$ и применяем функцию активации $$\inline{u_j}=f(y_j)$$
+	+ Считаем градиенты функции ошибки:
 
-$${{\partial{E}}\over{\partial{w_s_j}}}={{\partial{E}}\over{\partial{y_j}}}{{\partial{y_j}}\over{\partial{w_s_j}}}$$
+	$${{\partial{E}}\over{\partial{w_s_j}}}={{\partial{E}}\over{\partial{y_j}}}{{\partial{y_j}}\over{\partial{w_s_j}}}$$
 
-$${{\partial{E}}\over{\partial{y_j}}}=u_j-t_j$$
+	$${{\partial{E}}\over{\partial{y_j}}}=u_j-t_j$$
 
-$${{\partial{y_j}}\over{\partial{w_s_j}}}=v_s$$
+	$${{\partial{y_j}}\over{\partial{w_s_j}}}=v_s$$
 
-$${{\partial{E}}\over{\partial{w_s_j}}}=(u_j-t_j)v_s={\delta_j{v_s}}$$
+	$${{\partial{E}}\over{\partial{w_s_j}}}=(u_j-t_j)v_s={\delta_j{v_s}}$$
 
-$${{\partial{E}}\over{\partial{w_i_s}}}={{\partial{E}}\over{\partial{z_s}}}{{\partial{z_s}}\over{\partial{w_i_s}}}$$
+	$${{\partial{E}}\over{\partial{w_i_s}}}={{\partial{E}}\over{\partial{z_s}}}{{\partial{z_s}}\over{\partial{w_i_s}}}$$
 
-$${{\partial{E}}\over{\partial{z_s}}}=\sum_{j=1}^{N_o}{{\partial{E}}\over{\partial{y_j}}}{{\partial{y_j}}\over{\partial{v_s}}}{{\partial{f}}\over{\partial{z_s}}}={{\partial{f}}\over{\partial{z_s}}}\sum_{j=1}^{N_o}{{\partial{E}}\over{\partial{y_j}}}{{\partial{y_j}}\over{\partial{v_s}}}={{\partial{f}}\over{\partial{z_s}}}(\sum_{j=1}^{N_o}{\delta_j^2w_s_j^2})$$
+	$${{\partial{E}}\over{\partial{z_s}}}=\sum_{j=1}^{N_o}{{\partial{E}}\over{\partial{y_j}}}{{\partial{y_j}}\over{\partial{v_s}}}{{\partial{f}}\over{\partial{z_s}}}={{\partial{f}}\over{\partial{z_s}}}\sum_{j=1}^{N_o}{{\partial{E}}\over{\partial{y_j}}}{{\partial{y_j}}\over{\partial{v_s}}}={{\partial{f}}\over{\partial{z_s}}}(\sum_{j=1}^{N_o}{\delta_j^2w_s_j^2})$$
 
-$${{\partial{E}}\over{\partial{w_i_s}}}={{\partial{f}}\over{\partial{z_s}}}(\sum_{j=1}^{N_o}{\delta_j^2w_s_j^2}){x_i}$$
+	$${{\partial{E}}\over{\partial{w_i_s}}}={{\partial{f}}\over{\partial{z_s}}}(\sum_{j=1}^{N_o}{\delta_j^2w_s_j^2}){x_i}$$
 
-   В случае гиперболического тангеса:
+ 	В случае гиперболического тангеса:
 
-$${{\partial{f}}\over{\partial{z_s}}}=(1-v_s)(1+v_s)$$
+	$${{\partial{f}}\over{\partial{z_s}}}=(1-v_s)(1+v_s)$$
 
-   Тогда 
+ 	Тогда 
 
-$${{\partial{E}}\over{\partial{w_s_j}}}={\delta_j{v_s}}$$
+	$${{\partial{E}}\over{\partial{w_s_j}}}={\delta_j{v_s}}$$
 
-$${{\partial{E}}\over{\partial{w_i_s}}}={{\delta_s}{x_i}}$$
+	$${{\partial{E}}\over{\partial{w_i_s}}}={{\delta_s}{x_i}}$$
+	+ Корректируем веса в соответствии с градиентами функции ошибки:
+
+	$${w_i_s^{n+1}=w_i_s^{n}-\eta{{\partial{E}}\over{\partial{w_i_s}}}}$$
+
+	$${w_s_j^{n+1}=w_s_j^{n}-\eta{{\partial{E}}\over{\partial{w_s_j}}}}$$
+	
