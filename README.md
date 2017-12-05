@@ -24,6 +24,7 @@
 
 ## Метод обратноого распространения ошибки
 $$E=-\sum_{j=1}^{N_o}t_jlog(y_j) = -\sum_{j=1}^{N_o}t_jlog(f(\sum_{s=1}^{N_s}w_s_jf(\sum_{i=1}^{N_i}w_i_sx_i)))$$
+http://www.codecogs.com/eqnedit.php?latex=$$E=-\sum_{j=1}^{N_o}t_jlog(y_j)&space;=&space;-\sum_{j=1}^{N_o}t_jlog(f(\sum_{s=1}^{N_s}w_s_jf(\sum_{i=1}^{N_i}w_i_sx_i)))$$" target="_blank"><img src="http://latex.codecogs.com/gif.latex?$$E=-\sum_{j=1}^{N_o}t_jlog(y_j)&space;=&space;-\sum_{j=1}^{N_o}t_jlog(f(\sum_{s=1}^{N_s}w_s_jf(\sum_{i=1}^{N_i}w_i_sx_i)))$$" title="$$E=-\sum_{j=1}^{N_o}t_jlog(y_j) = -\sum_{j=1}^{N_o}t_jlog(f(\sum_{s=1}^{N_s}w_s_jf(\sum_{i=1}^{N_i}w_i_sx_i)))$$
 ### Прямой проход
 1. Инициализируем веса 
 2.	
@@ -33,3 +34,4 @@ $$E=-\sum_{j=1}^{N_o}t_jlog(y_j) = -\sum_{j=1}^{N_o}t_jlog(f(\sum_{s=1}^{N_s}w_s
 1.
 2.
 3.
+
