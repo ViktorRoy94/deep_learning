@@ -69,4 +69,3 @@ $$f(y_j)={{e^{y_j}}\over\sum_{j=1}^{n}e^{y_j}}$$
 	$${w_i_s^{n+1}=w_i_s^{n}-\eta{{\partial{E}}\over{\partial{w_i_s}}}}$$
 
 	$${w_s_j^{n+1}=w_s_j^{n}-\eta{{\partial{E}}\over{\partial{w_s_j}}}}$$
-	
