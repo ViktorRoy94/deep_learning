@@ -37,10 +37,8 @@
 2. Пока количество проходов < max_epoch делаем:
 
 	Для всех картинок от 1 до number_train_images
-	+ Подаем на вход x, суммируем cигналы на скрытом слое <p align="center"><img src="https://rawgit.com/ViktorRoy94/deep_learning_lab1/master//tex/24e5debb20cdd9d2d9a3364b5f0e09b4.svg?invert_in_darkmode" align=middle width=147.64645499999997pt height=47.988764999999994pt/></p>, применяем функцию активации <p align="center"><img src="https://rawgit.com/ViktorRoy94/deep_learning_lab1/master//tex/f51a384170c325d917092dd626941950.svg?invert_in_darkmode" align=middle width=74.185815pt height=16.438356pt/></p>
-    + Для каждого выходного нейрона суммируем взвешенные входящие сигналы 
-    $$\inline{y_j}=w_0_j+\sum_{s}^{N_s}{w_s_j}f({z_s})$$, применяем функцию активации
-    $$\inline{u_j}=f(y_j)$$
+	+ Подаем на вход x, суммируем cигналы на скрытом слое <p align="center"><img src="https://rawgit.com/ViktorRoy94/deep_learning_lab1/master//tex/24e5debb20cdd9d2d9a3364b5f0e09b4.svg?invert_in_darkmode" align=middle width=147.64645499999997pt height=47.988764999999994pt/></p>, применяем функцию активации <p align="center"><img src="https://rawgit.com/ViktorRoy94/deep_learning_lab1/master//tex/7912182562a715a981fff4ab40bfb87a.svg?invert_in_darkmode" align=middle width=74.16288pt height=16.438356pt/></p>
+    + Для каждого выходного нейрона суммируем взвешенные входящие сигналы $$\inline{y_j}=w_0_j+\sum_{s}^{N_s}{w_s_j}{f(z_s)}$$, применяем функцию активации $$\inline{u_j}=f(y_j)$$
 	+ Считаем градиенты функции ошибки:
 
 	<p align="center"><img src="https://rawgit.com/ViktorRoy94/deep_learning_lab1/master//tex/33a5033e2a26ab9a0fdd1e5448f360f8.svg?invert_in_darkmode" align=middle width=125.15744999999998pt height=38.51529pt/></p>
