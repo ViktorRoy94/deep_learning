@@ -57,7 +57,7 @@ $$f(y_j)={{e^{y_j}}\over\sum_{j=1}^{n}e^{y_j}}$$
 
 	$${{\partial{E}}\over{\partial{w_i_s}}}={{\partial{f}}\over{\partial{z_s}}}(\sum_{j=1}^{N_o}{\delta_j^2w_s_j^2}){x_i}$$
 
- 	 В случае гиперболического тангеса:
+ 	 В случае гиперболического тангеса: 
 
 	$${{\partial{f}}\over{\partial{z_s}}}=(1-v_s)(1+v_s)$$
 
