@@ -44,16 +44,17 @@ class NeuralNetwork:
 		rand_indicies = np.arange(len(x_values))
 		for epoch in range(maxEpochs):
 			print("Epoch = ", epoch)
-			if (self.crossEntropyError(x_values, t_values) < crossError):
-				return;
-
 			np.random.shuffle(rand_indicies)
 			x_values = x_values[rand_indicies]
 			t_values = t_values[rand_indicies]
+
 			for i in range(len(x_values)):
 				self.computeOutputs(x_values[i])
 				self.computeGradient(t_values[i], oGrads, hGrads)
 				self.updateWeightsAndBiases(learnRate, hGrads, oGrads)
+
+			if (self.crossEntropyError(x_values, t_values) < crossError):
+				return;
 
 	def computeOutputs(self, xValues):
 		hSums = np.zeros(shape=[self.nh], dtype=np.float32)
