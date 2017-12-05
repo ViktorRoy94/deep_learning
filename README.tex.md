@@ -26,7 +26,10 @@
 Функция ошибки кросс-энтропия:
 $$E=-\sum_{j=1}^{N_o}t_jlog(y_j) = -\sum_{j=1}^{N_o}t_jlog(f(\sum_{s=1}^{N_s}w_s_jf(\sum_{i=1}^{N_i}w_i_sx_i)))$$
 
-Функция активации softmax:
+Функция активации на скрытом слое тангес:
+$$\phi(y_j)={{e^{2y_j}-1}\over{e^{2y_j}+1}}$$
+
+Функция активации на втором слое softmax:
 $$f(y_j)={{e^{y_j}}\over\sum_{j=1}^{n}e^{y_j}}$$
 
 ### Алгоритм
@@ -37,4 +40,27 @@ $$f(y_j)={{e^{y_j}}\over\sum_{j=1}^{n}e^{y_j}}$$
 	1. Подаем на вход $$\inline{x_i}$$, суммируем cигналы на скрытом слое $$\inline{z_s}=w_0_s+\sum_{i}^{N_i}{w_i_s}x_i$$, применяем функцию активации $$\inline{v_s}=f(z_s)$$
     2. Для каждого выходного нейрона суммируем взвешенные входящие сигналы  $$\inline{y_j}=w_0_j+\sum_{s}^{N_s}{w_s_j}f({z_s})$$ и применяем функцию активации $$\inline{u_j}=f(y_j)$$
 	3. Считаем градиенты функции ошибки:
-        
+
+$${{\partial{E}}\over{\partial{w_s_j}}}={{\partial{E}}\over{\partial{y_j}}}{{\partial{y_j}}\over{\partial{w_s_j}}}$$
+
+$${{\partial{E}}\over{\partial{y_j}}}=u_j-t_j$$
+
+$${{\partial{y_j}}\over{\partial{w_s_j}}}=v_s$$
+
+$${{\partial{E}}\over{\partial{w_s_j}}}=(u_j-t_j)v_s={\delta_j{v_s}}$$
+
+$${{\partial{E}}\over{\partial{w_i_s}}}={{\partial{E}}\over{\partial{z_s}}}{{\partial{z_s}}\over{\partial{w_i_s}}}$$
+
+$${{\partial{E}}\over{\partial{z_s}}}=\sum_{j=1}^{N_o}{{\partial{E}}\over{\partial{y_j}}}{{\partial{y_j}}\over{\partial{v_s}}}{{\partial{f}}\over{\partial{z_s}}}={{\partial{f}}\over{\partial{z_s}}}\sum_{j=1}^{N_o}{{\partial{E}}\over{\partial{y_j}}}{{\partial{y_j}}\over{\partial{v_s}}}={{\partial{f}}\over{\partial{z_s}}}(\sum_{j=1}^{N_o}{\delta_j^2w_s_j^2})$$
+
+$${{\partial{E}}\over{\partial{w_i_s}}}={{\partial{f}}\over{\partial{z_s}}}(\sum_{j=1}^{N_o}{\delta_j^2w_s_j^2}){x_i}$$
+
+   В случае гиперболического тангеса:
+
+$${{\partial{f}}\over{\partial{z_s}}}=(1-v_s)(1+v_s)$$
+
+   Тогда 
+
+$${{\partial{E}}\over{\partial{w_s_j}}}={\delta_j{v_s}}$$
+
+$${{\partial{E}}\over{\partial{w_i_s}}}={{\delta_s}{x_i}}$$
