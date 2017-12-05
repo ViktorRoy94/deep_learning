@@ -25,7 +25,7 @@
 ## Метод обратноого распространения ошибки
 $$E=-\sum_{j=1}^{N_o}t_jlog(y_j) = -\sum_{j=1}^{N_o}t_jlog(f(\sum_{s=1}^{N_s}w_s_jf(\sum_{i=1}^{N_i}w_i_sx_i)))$$
 http://www.codecogs.com/eqnedit.php?latex=$$E=-\sum_{j=1}^{N_o}t_jlog(y_j)&space;=&space;-\sum_{j=1}^{N_o}t_jlog(f(\sum_{s=1}^{N_s}w_s_jf(\sum_{i=1}^{N_i}w_i_sx_i)))$$" target="_blank"><img src="http://latex.codecogs.com/gif.latex?$$E=-\sum_{j=1}^{N_o}t_jlog(y_j)&space;=&space;-\sum_{j=1}^{N_o}t_jlog(f(\sum_{s=1}^{N_s}w_s_jf(\sum_{i=1}^{N_i}w_i_sx_i)))$$" title="$$E=-\sum_{j=1}^{N_o}t_jlog(y_j) = -\sum_{j=1}^{N_o}t_jlog(f(\sum_{s=1}^{N_s}w_s_jf(\sum_{i=1}^{N_i}w_i_sx_i)))$$
-![equation](http://latex.codecogs.com/gif.download?%24%24E%3D-%5Csum_%7Bj%3D1%7D%5E%7BN_o%7Dt_jlog%28y_j%29%20%3D%20-%5Csum_%7Bj%3D1%7D%5E%7BN_o%7Dt_jlog%28f%28%5Csum_%7Bs%3D1%7D%5E%7BN_s%7Dw_s_jf%28%5Csum_%7Bi%3D1%7D%5E%7BN_i%7Dw_i_sx_i%29%29%29%24%24)
+![img](http://latex.codecogs.com/gif.download?%24%24E%3D-%5Csum_%7Bj%3D1%7D%5E%7BN_o%7Dt_jlog%28y_j%29%20%3D%20-%5Csum_%7Bj%3D1%7D%5E%7BN_o%7Dt_jlog%28f%28%5Csum_%7Bs%3D1%7D%5E%7BN_s%7Dw_s_jf%28%5Csum_%7Bi%3D1%7D%5E%7BN_i%7Dw_i_sx_i%29%29%29%24%24)
 ### Прямой проход
 1. Инициализируем веса 
 2.	
