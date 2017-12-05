@@ -38,7 +38,9 @@ $$f(y_j)={{e^{y_j}}\over\sum_{j=1}^{n}e^{y_j}}$$
 
 	Для всех картинок от 1 до number_train_images
 	+ Подаем на вход x, суммируем cигналы на скрытом слое $$\inline{z_s}=w_0_s+\sum_{i}^{N_i}{w_i_s}x_i$$, применяем функцию активации $$\inline{v_s}=f(z_s)$$
-    + Для каждого выходного нейрона суммируем взвешенные входящие сигналы $$\inline{y_j}=w_0_j+\sum_{s}^{N_s}{w_s_j}f({z_s})$$ и применяем функцию активации $$\inline{u_j}=f(y_j)$$
+    + Для каждого выходного нейрона суммируем взвешенные входящие сигналы 
+    $$\inline{y_j}=w_0_j+\sum_{s}^{N_s}{w_s_j}f({z_s})$$, применяем функцию активации
+    $$\inline{u_j}=f(y_j)$$
 	+ Считаем градиенты функции ошибки:
 
 	$${{\partial{E}}\over{\partial{w_s_j}}}={{\partial{E}}\over{\partial{y_j}}}{{\partial{y_j}}\over{\partial{w_s_j}}}$$
@@ -55,11 +57,11 @@ $$f(y_j)={{e^{y_j}}\over\sum_{j=1}^{n}e^{y_j}}$$
 
 	$${{\partial{E}}\over{\partial{w_i_s}}}={{\partial{f}}\over{\partial{z_s}}}(\sum_{j=1}^{N_o}{\delta_j^2w_s_j^2}){x_i}$$
 
- 	В случае гиперболического тангеса:
+ 	 В случае гиперболического тангеса:
 
 	$${{\partial{f}}\over{\partial{z_s}}}=(1-v_s)(1+v_s)$$
 
- 	Тогда 
+ 	 Тогда 
 
 	$${{\partial{E}}\over{\partial{w_s_j}}}={\delta_j{v_s}}$$
 
