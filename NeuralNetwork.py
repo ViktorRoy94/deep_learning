@@ -22,8 +22,8 @@ class NeuralNetwork:
 		self.initializeWeights()
 
 	def initializeWeights(self):
-		lo = 0.001 
-		hi = 0.009
+		lo = 0
+		hi = 0.5
 		for i in range(self.ni):
 		  for j in range(self.nh):
 		    self.ihWeights[i,j] = (hi - lo) * self.rnd.random() + lo
