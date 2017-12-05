@@ -38,7 +38,9 @@
 
 	Для всех картинок от 1 до number_train_images
 	+ Подаем на вход x, суммируем cигналы на скрытом слое <p align="center"><img src="https://rawgit.com/ViktorRoy94/deep_learning_lab1/master//tex/24e5debb20cdd9d2d9a3364b5f0e09b4.svg?invert_in_darkmode" align=middle width=147.64645499999997pt height=47.988764999999994pt/></p>, применяем функцию активации <p align="center"><img src="https://rawgit.com/ViktorRoy94/deep_learning_lab1/master//tex/f51a384170c325d917092dd626941950.svg?invert_in_darkmode" align=middle width=74.185815pt height=16.438356pt/></p>
-    + Для каждого выходного нейрона суммируем взвешенные входящие сигналы $$\inline{y_j}=w_0_j+\sum_{s}^{N_s}{w_s_j}f({z_s})$$ и применяем функцию активации $$\inline{u_j}=f(y_j)$$
+    + Для каждого выходного нейрона суммируем взвешенные входящие сигналы 
+    $$\inline{y_j}=w_0_j+\sum_{s}^{N_s}{w_s_j}f({z_s})$$, применяем функцию активации
+    $$\inline{u_j}=f(y_j)$$
 	+ Считаем градиенты функции ошибки:
 
 	<p align="center"><img src="https://rawgit.com/ViktorRoy94/deep_learning_lab1/master//tex/33a5033e2a26ab9a0fdd1e5448f360f8.svg?invert_in_darkmode" align=middle width=125.15744999999998pt height=38.51529pt/></p>
@@ -55,11 +57,11 @@
 
 	<p align="center"><img src="https://rawgit.com/ViktorRoy94/deep_learning_lab1/master//tex/cb94e20f4bd01e87c2e1c95ef063383e.svg?invert_in_darkmode" align=middle width=180.84165pt height=50.226165pt/></p>
 
- 	В случае гиперболического тангеса:
+ 	 В случае гиперболического тангеса: 
 
 	<p align="center"><img src="https://rawgit.com/ViktorRoy94/deep_learning_lab1/master//tex/a2d1f5c4c1cfd4eb7b679350d8aeb85d.svg?invert_in_darkmode" align=middle width=160.38198pt height=36.27789pt/></p>
 
- 	Тогда 
+ 	 Тогда 
 
 	<p align="center"><img src="https://rawgit.com/ViktorRoy94/deep_learning_lab1/master//tex/e047b5019a674502886d7230d6dfb0ad.svg?invert_in_darkmode" align=middle width=87.65657999999999pt height=38.51529pt/></p>
 
