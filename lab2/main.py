@@ -1,5 +1,6 @@
 import cv2
 import glob
+import numpy as np
 
 map_characters = {0: 'abraham_grampa_simpson', 1: 'apu_nahasapeemapetilon',
         2: 'bart_simpson', 3: 'charles_montgomery_burns', 4: 'chief_wiggum',
@@ -11,12 +12,13 @@ map_characters = {0: 'abraham_grampa_simpson', 1: 'apu_nahasapeemapetilon',
 
 pic_size = 64
 
-def load_pictures(BGR):
+def load_pictures(path, BGR):
     pics = []
     labels = []
     for k, char in map_characters.items():
-        pictures = [k for k in glob.glob('./characters/%s/*' % char)]
-        nb_pic = round(pictures_per_class/(1-test_size)) if round(pictures_per_class/(1-test_size))<len(pictures) else len(pictures)
+    	print(char)
+        pictures = [k for k in glob.glob(path + '%s/*' % char)]
+        nb_pic = len(pictures)
         for pic in np.random.choice(pictures, nb_pic):
             a = cv2.imread(pic)
             if BGR:
@@ -27,9 +29,9 @@ def load_pictures(BGR):
     return np.array(pics), np.array(labels)
 
 def main():
-    X,y = load_pictures()
-    print(X.shape())
-    print(y.shape())
+    X,y = load_pictures('/home/viktor/Downloads/simpsons/', True)
+    print(X.shape)
+    print(y.shape)
 
 if __name__ == '__main__':
     main()
