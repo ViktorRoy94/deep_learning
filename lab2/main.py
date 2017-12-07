@@ -28,10 +28,23 @@ def load_pictures(path, BGR):
             labels.append(k)
     return np.array(pics), np.array(labels)
 
+def split_data(X, y, percent):
+	n = len(X)
+	rand_indicies = np.arange(n)
+	np.random.shuffle(rand_indicies)
+	X = X[rand_indicies]
+	y = y[rand_indicies]
+	index = int(n * percent / 100)
+	return X[:index], X[index:], y[:index], y[index:]
+
+
 def main():
     X,y = load_pictures('/home/viktor/Downloads/simpsons/', True)
     print(X.shape)
     print(y.shape)
+    X_train, X_test, y_train, y_test = split_data(X, y, 70)
+    print(X_train.shape)
+    print(X_test.shape)
 
 if __name__ == '__main__':
     main()
