@@ -96,7 +96,7 @@ def run_train_and_test(X_train, X_test, y_train, y_test):
                    optimizer_params = {'learning_rate':0.01},  # use fixed learning rate
                    eval_metric = 'acc',  # report accuracy during training
                    batch_end_callback = mx.callback.Speedometer(batch_size, 100000), # output progress for each 100 data batches
-                   num_epoch = 100)  # train for at most 10 dataset passes
+                   num_epoch = 100)  # train for at most 100 dataset passes
 
     # Test
     test_iter = mx.io.NDArrayIter(X_test,
