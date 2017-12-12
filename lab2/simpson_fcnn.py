@@ -1,8 +1,19 @@
 import mxnet as mx
 import logging
 import os.path
-import cv2
+import time
+import read_write_data as io
 
+def timer(f):
+    def tmp(*args, **kwargs):
+        t1 = time.time()
+        res = f(*args, **kwargs)
+        t2 = time.time()
+        print("Function time = %f" % (t2-t1))
+        return res
+    return tmp
+
+@timer
 def run_train_and_test(X_train, X_test, y_train, y_test):
     print("X_train.shape =", X_train.shape)
     print("y_train.shape =", y_train.shape)

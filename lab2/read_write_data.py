@@ -25,9 +25,9 @@ def load_pictures(path, BGR):
             if BGR:
                 a = cv2.cvtColor(a, cv2.COLOR_BGR2RGB)
             a = cv2.resize(a, (pic_size,pic_size)).astype('float32') / 255
+            a = np.rollaxis(a, 2, 0)
             pics.append(a)
             labels.append(class_simpson)
-    print("Done")
     return np.array(pics), np.array(labels)
 
 def split_data(X, y, percent):

@@ -35,7 +35,7 @@ def run_train_and_test(X_train, X_test, y_train, y_test):
 	# 1st convolution layer
 	conv_1 = mx.sym.Convolution(data = data, kernel = [2, 2], num_filter = 20)
 	tanh_1 = mx.sym.Activation(data = conv_1, act_type = "tanh")
-	pool_1 = mx.sym.Pooling(data = tanh_1, pool_type = "max", kernel = [2, 2], stride = [1, 1])
+	pool_1 = mx.sym.Pooling(data = tanh_1, pool_type = "max", kernel = [3, 3], stride = [1, 1])
 	# 1st full layer
 	flatten = mx.sym.Flatten(data = pool_1)
 	fc_1 = mx.sym.FullyConnected(data = flatten, num_hidden = 300)
