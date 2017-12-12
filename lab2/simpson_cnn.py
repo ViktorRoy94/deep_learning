@@ -1,8 +1,19 @@
 import mxnet as mx
 import logging
 import os.path
+import time
 import read_write_data as io
 
+def timer(f):
+	def tmp(*args, **kwargs):
+		t1 = time.time()
+		res = f(*args, **kwargs)
+		t2 = time.time()
+		print("Function time = %f" % (t2-t1))
+		return res
+	return tmp
+
+@timer
 def run_train_and_test(X_train, X_test, y_train, y_test):
 	print("X_train.shape =", X_train.shape)
 	print("y_train.shape =", y_train.shape)
@@ -42,7 +53,7 @@ def run_train_and_test(X_train, X_test, y_train, y_test):
 	                 optimizer_params = {'learning_rate':0.1},  # use fixed learning rate
 	                 eval_metric = 'acc',  # report accuracy during training
 	                 batch_end_callback = mx.callback.Speedometer(batch_size, 100), # output progress for each 100 data batches
-	                 num_epoch = 100)  # train for at most 100 dataset passes
+	                 num_epoch = 10)  # train for at most 100 dataset passes
 
 	# Test
 	test_iter = mx.io.NDArrayIter(X_test,
