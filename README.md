@@ -42,9 +42,9 @@
 ## Метрика качества решения задачи
 
 Качество решения рассматриваемой задачи оценивается с помощью метрики – точность классификации.
-<p align="center"><img src="https://rawgit.com/ViktorRoy94/deep_learning/dev_vroy_lab2//tex/3206b6e62796ad47836ff5c5eec1b322.svg?invert_in_darkmode" align=middle width=263.0232pt height=47.80611pt/></p>
+<p align="center"><img src="https://rawgit.com/ViktorRoy94/deep_learning/master//tex/3206b6e62796ad47836ff5c5eec1b322.svg?invert_in_darkmode" align=middle width=263.0232pt height=47.80611pt/></p>
 <center>
-где 
+где
 N – количество изображений в выборке,  
 y - истинная метка,   
 y' - предсказанная метка,  
