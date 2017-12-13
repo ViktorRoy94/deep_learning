@@ -69,7 +69,7 @@ def run_train_and_test(X_train, X_test, y_train, y_test):
 
 def main():
     if not os.path.isfile('X_train.npy'):
-        X,y = io.load_pictures('characters/', True)
+        X,y = io.load_pictures('../../data/characters/', True)
         X_train, X_test, y_train, y_test = io.split_data(X, y, 85)
         io.write_data_to_file(X_train, X_test, y_train, y_test)
     else:

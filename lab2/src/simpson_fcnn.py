@@ -51,7 +51,7 @@ def run_train_and_test(X_train, X_test, y_train, y_test):
                    optimizer = 'sgd',  # use SGD to train
                    optimizer_params = {'learning_rate':0.01},  # use fixed learning rate
                    eval_metric = 'acc',  # report accuracy during training
-                   batch_end_callback = mx.callback.Speedometer(batch_size, 100000), # output progress for each 100 data batches
+                   batch_end_callback = mx.callback.Speedometer(batch_size, 100), # output progress for each 100 data batches
                    num_epoch = 100)  # train for at most 100 dataset passes
 
     # Test
@@ -64,7 +64,7 @@ def run_train_and_test(X_train, X_test, y_train, y_test):
 
 def main():
     if not os.path.isfile('X_train.npy'):
-        X,y = io.load_pictures('characters\\', True)
+        X,y = io.load_pictures('../../data/characters/', True)
         X_train, X_test, y_train, y_test = io.split_data(X, y, 85)
         io.write_data_to_file(X_train, X_test, y_train, y_test)
     else:
