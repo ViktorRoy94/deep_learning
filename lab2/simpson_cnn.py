@@ -33,16 +33,16 @@ def run_train_and_test(X_train, X_test, y_train, y_test):
 	# Symbol model
 	data = mx.sym.var('data')
 	# 1st convolution layer
-	conv_1 = mx.sym.Convolution(data = data, kernel = [5, 5], num_filter = 20)
+	conv_1 = mx.sym.Convolution(data = data, kernel = [5, 5], num_filter = 20, stride = [1, 1])
 	tanh_1 = mx.sym.Activation(data = conv_1, act_type = "tanh")
-	pool_1 = mx.sym.Pooling(data = tanh_1, pool_type = "max", kernel = [2, 2], stride = [2, 2])
+	pool_1 = mx.sym.Pooling(data = tanh_1, pool_type = "max", kernel = [3, 3], stride = [2, 2])
 	# 2st convolution layer
-	conv_2 = mx.sym.Convolution(data = pool_1, kernel = [5, 5], num_filter = 20)
+	conv_2 = mx.sym.Convolution(data = pool_1, kernel = [5, 5], num_filter = 20, stride = [1, 1])
 	tanh_2 = mx.sym.Activation(data = conv_2, act_type = "tanh")
 	pool_2 = mx.sym.Pooling(data = tanh_2, pool_type = "max", kernel = [2, 2], stride = [2, 2])
 	# 1st full layer
 	flatten = mx.sym.Flatten(data = pool_2)
-	fc_1 = mx.sym.FullyConnected(data = flatten, num_hidden = 500)
+	fc_1 = mx.sym.FullyConnected(data = flatten, num_hidden = 200)
 	tanh_3 = mx.sym.Activation(data = fc_1, act_type = "tanh")
 	# 2d full layer
 	fc_2 = mx.sym.FullyConnected(data = tanh_3, num_hidden = 18)
@@ -54,7 +54,7 @@ def run_train_and_test(X_train, X_test, y_train, y_test):
 	cnn_model.fit(train_iter,  # train data
 	                 eval_data = val_iter,  # validation data
 	                 optimizer = 'sgd',  # use SGD to train
-	                 optimizer_params = {'learning_rate':0.1},  # use fixed learning rate
+	                 optimizer_params = {'learning_rate':0.01},  # use fixed learning rate
 	                 eval_metric = 'acc',  # report accuracy during training
 	                 batch_end_callback = mx.callback.Speedometer(batch_size, 100), # output progress for each 100 data batches
 	                 num_epoch = 50)  # train for at most 100 dataset passes
