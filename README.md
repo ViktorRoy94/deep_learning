@@ -15,7 +15,7 @@
 ## Тренировочные и тестовые наборы данных
 
 Набор данных [«The Simpsons Characters Data»]( https://www.kaggle.com/alexattia/the-simpsons-characters-dataset/data) 
-содержит рисунки для 18 персонажей из мультфильма «Симпсоны». Изначально данные не разделены на обучающую и тестовую выборки. 
+содержит рисунки для 18 персонажей из мультфильма «Симпсоны». Данны были переработаны, убраны картинки, содержащие более одного персонажа. Доступны по [cсылке](https://yadi.sk/d/dtnDZ7KP3QgfWb). Изначально данные не разделены на обучающую и тестовую выборки. 
 Количество картинок для каждого персонажа указано в таблице.
 
   №   |         Name                  |   Total     
@@ -42,7 +42,7 @@
 ## Метрика качества решения задачи
 
 Качество решения рассматриваемой задачи оценивается с помощью метрики – точность классификации.
-<p align="center"><img src="https://rawgit.com/ViktorRoy94/deep_learning/dev_vroy_lab2//tex/3206b6e62796ad47836ff5c5eec1b322.svg?invert_in_darkmode" align=middle width=263.0232pt height=47.80611pt/></p>
+<p align="center"><img src="https://rawgit.com/ViktorRoy94/deep_learning/master//tex/3206b6e62796ad47836ff5c5eec1b322.svg?invert_in_darkmode" align=middle width=263.0232pt height=47.80611pt/></p>
 <center>
 где
 N – количество изображений в выборке,  
