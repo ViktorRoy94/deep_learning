@@ -37,9 +37,9 @@
 2. Пока количество проходов < max_epoch делаем:
 
 	Для всех картинок от 1 до number_train_images
-	+ Подаем на вход x, суммируем cигналы на скрытом слое <img src="https://rawgit.com/ViktorRoy94/deep_learning/dev_vroy/tex//4103d3e79fea5164061ddeaa7684d372.svg?invert_in_darkmode" align=middle width=8.1885045pt height=14.10255pt/> применяем функцию активации <img src="https://rawgit.com/ViktorRoy94/deep_learning/dev_vroy/tex//fa735bd3d5226cf9d1545f8e82e7c15b.svg?invert_in_darkmode" align=middle width=8.1885045pt height=14.10255pt/>
+	+ Подаем на вход x, суммируем cигналы на скрытом слое <img src="https://rawgit.com/ViktorRoy94/deep_learning/dev_vroy/tex//d56061e15701f2f403161d5c087602bb.svg?invert_in_darkmode" align=middle width=162.891795pt height=32.19744pt/> применяем функцию активации <img src="https://rawgit.com/ViktorRoy94/deep_learning/dev_vroy/tex//a35f7e2cd847398f6a39cb9540dea143.svg?invert_in_darkmode" align=middle width=74.00217pt height=24.56553pt/>
 
-	+ Для каждого выходного нейрона суммируем взвешенные входящие сигналы <img src="https://rawgit.com/ViktorRoy94/deep_learning/dev_vroy/tex//2bdeadcb4b376398c4ec45103ab9af7f.svg?invert_in_darkmode" align=middle width=8.1885045pt height=14.10255pt/> применяем функцию1 активации <img src="https://rawgit.com/ViktorRoy94/deep_learning/dev_vroy/tex//83781cdfb4d517363b69c2c87a038940.svg?invert_in_darkmode" align=middle width=8.1885045pt height=14.10255pt/>
+	+ Для каждого выходного нейрона суммируем взвешенные входящие сигналы <img src="https://rawgit.com/ViktorRoy94/deep_learning/dev_vroy/tex//151a4ea794d8584fae7c0dd920cda403.svg?invert_in_darkmode" align=middle width=188.123595pt height=32.19744pt/> применяем функцию1 активации <img src="https://rawgit.com/ViktorRoy94/deep_learning/dev_vroy/tex//cad87fd07088fc2604ffb47704341ce7.svg?invert_in_darkmode" align=middle width=75.687315pt height=24.56553pt/>
 
 	+ Считаем градиенты функции ошибки:
 
