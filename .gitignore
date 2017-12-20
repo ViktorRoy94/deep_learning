@@ -2,3 +2,4 @@ train*
 t10k*
 *.npy
 *.pyc
+characters/*
