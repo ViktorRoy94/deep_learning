@@ -14,6 +14,10 @@ def timer(f):
   return tmp
 
 def run_train_and_test(X_train, X_test, y_train, y_test):
+    pic_size = X_train.shape[2]
+    X_train = X_train.reshape(len(X_train), pic_size*pic_size*3)
+    X_test = X_test.reshape(len(X_test), pic_size*pic_size*3)
+
     print("X_train.shape =", X_train.shape)
     print("y_train.shape =", y_train.shape)
     print("X_test.shape =", X_test.shape)
