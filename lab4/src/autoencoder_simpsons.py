@@ -67,7 +67,7 @@ def run_train_and_test(X_train, X_test, y_train, y_test, args):
                                     batch_size, shuffle = True)						
     test_iter = mx.io.NDArrayIter(X_test,
                                    y_test,
-    							   batch_size)
+								   batch_size)
     							 
     data = mx.sym.var('data')
     data = mx.sym.flatten(data = data)
@@ -78,15 +78,15 @@ def run_train_and_test(X_train, X_test, y_train, y_test, args):
 
     fcnn_model = mx.mod.Module(symbol = out, context = mx.cpu())
     fcnn_model.fit(train_iter,  # train data
-                   eval_data = test_iter,  # validation data
-                   optimizer = 'sgd',  # use SGD to train
-    			   arg_params = args,
-    			   allow_missing = True,
-    			   initializer = mx.init.Xavier(rnd_type = 'gaussian', factor_type = "in", magnitude = 2),
-                   optimizer_params = {'learning_rate':0.01},  # use fixed learning rate
-                   eval_metric = 'acc',  # report cross-entropy during training
-                   batch_end_callback = mx.callback.Speedometer(1000, 1000), # output progress
-                   num_epoch = 50)  # train for at most 10 dataset passes
+					eval_data = test_iter,  # validation data
+					optimizer = 'sgd',  # use SGD to train
+					arg_params = args,
+					allow_missing = True,
+					initializer = mx.init.Xavier(rnd_type = 'gaussian', factor_type = "in", magnitude = 2),
+					optimizer_params = {'learning_rate':0.01},  # use fixed learning rate
+					eval_metric = 'acc',  # report cross-entropy during training
+					batch_end_callback = mx.callback.Speedometer(1000, 1000), # output progress
+					num_epoch = 50)  # train for at most 10 dataset passes
     			 
     acc = mx.metric.Accuracy()
     fcnn_model.score(test_iter, acc)
