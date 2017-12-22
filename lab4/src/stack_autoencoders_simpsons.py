@@ -52,12 +52,10 @@ def autoencoder_one(X_train, batch_size):
 	# Train autoencoder 1
 	autoencoder1_model = mx.mod.Module(symbol = out_autoencoder, context = mx.cpu())
 	autoencoder1_model.fit(train_iter1,  # train data
-							optimizer = 'sgd',  # use SGD to train
-							optimizer_params = {'learning_rate':0.01},  # use fixed learning rate
-							eval_metric = eval_metric1,  # report mse during training
-							num_epoch = 1) 
-
-							
+						   optimizer = 'sgd',  # use SGD to train
+						   optimizer_params = {'learning_rate':0.01},  # use fixed learning rate
+						   eval_metric = eval_metric1,  # report mse during training
+						   num_epoch = 1) 						
 	return autoencoder1_model		
 
 def forward_autoencoder_one(autoencoder1_model, X_train):
@@ -99,10 +97,10 @@ def autoencoder_two(input_for_autoencoder2, batch_size):
 	# Train autoencoder 2
 	autoencoder2_model = mx.mod.Module(symbol = out_autoencoder, context = mx.cpu())
 	autoencoder2_model.fit(train_iter2,  # train data
-							optimizer = 'sgd',  # use SGD to train
-							optimizer_params = {'learning_rate':0.01},  # use fixed learning rate
-							eval_metric = eval_metric2,  # report mse during training
-							num_epoch = 1)
+						   optimizer = 'sgd',  # use SGD to train
+						   optimizer_params = {'learning_rate':0.01},  # use fixed learning rate
+						   eval_metric = eval_metric2,  # report mse during training
+						   num_epoch = 1)
 	return autoencoder2_model
 	
 @timer("time train fcnn = ")
@@ -114,8 +112,9 @@ def run_train_and_test_fcnn(X_train, X_test, y_train, y_test, batch_size, autoen
 	new_args.update(dict({k:arg_params[k] for k in arg_params if 'full_2' in k}))
 	
 	train_iter = mx.io.NDArrayIter(X_train,
-									y_train,
-									batch_size, shuffle = True)						
+								   y_train,
+								   batch_size, shuffle = True)						
+	
 	test_iter = mx.io.NDArrayIter(X_test,
 								  y_test,
 								  batch_size)
@@ -131,14 +130,14 @@ def run_train_and_test_fcnn(X_train, X_test, y_train, y_test, batch_size, autoen
 
 	fcnn_model = mx.mod.Module(symbol = out, context = mx.cpu())
 	fcnn_model.fit(train_iter,  # train data
-               eval_data = test_iter,  # validation data
-               optimizer = 'sgd',  # use SGD to train
-			   arg_params = new_args,
-			   allow_missing = True,
-			   initializer = mx.init.Xavier(rnd_type = 'gaussian', factor_type = "in", magnitude = 2),
-               optimizer_params = {'learning_rate':0.01},  # use fixed learning rate
-               eval_metric = 'acc',  # report cross-entropy during training
-               num_epoch = 1)  # train for at most 10 dataset passes
+				   eval_data = test_iter,  # validation data
+				   optimizer = 'sgd',  # use SGD to train
+				   arg_params = new_args,
+				   allow_missing = True,
+				   initializer = mx.init.Xavier(rnd_type = 'gaussian', factor_type = "in", magnitude = 2),
+				   optimizer_params = {'learning_rate':0.01},  # use fixed learning rate
+				   eval_metric = 'acc',  # report cross-entropy during training
+				   num_epoch = 1)  # train for at most 10 dataset passes
 			 
 	acc = mx.metric.Accuracy()
 	fcnn_model.score(test_iter, acc)
